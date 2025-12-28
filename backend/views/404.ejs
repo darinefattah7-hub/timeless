@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/homepage.css" />
+      <link rel="stylesheet" href="/responsive.css" />
+       <link rel="stylesheet" href="/subpages.css" />
+      <link rel="stylesheet" href="/404.css" />
+
+
+  </head>
+  <body>
+    <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+    <div class="container">
+      <section class="content">
+        <h1>Oops 404 - Page Not Found 😞</h1>
+      </section>
+    </div>
+    <%- include('includes/footer.ejs') %>
+  </body>
+</html>

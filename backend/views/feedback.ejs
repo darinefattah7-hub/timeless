@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+   <link rel="stylesheet" href="/homepage.css" />
+<link rel="stylesheet" href="/responsive.css" />
+       <link rel="stylesheet" href="/subpages.css" />
+
+
+</head>
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+    <% if (isAuthenticated) {%>
+               
+    <h2>We value your Feedback!</h2>
+
+
+
+
+   
+
+    <div class="fb-tab-content">
+   
+          <div id="fb-category" style="margin-top: 200px;" class="fb-tab-pane active">
+        <div class="fb-category-prompt">
+          <p>Would you like to leave feedback about Jewelry?</p>
+          <a href="/user/feedbackJewelry" >Leave your feedback about Jewelry here</a>
+        </div>
+        <div class="fb-category-prompt">
+          <p>Would you like to leave feedback about Accessories?</p>
+          <a href="/user/feedbackAccessories" >Leave your feedback about Accessories here</a>
+        </div>
+        <div class="fb-category-prompt">
+          <p>Would you like to leave feedback about Customer Service?</p>
+          <a href="/user/feedbackCustomerService">Leave your feedback about Customer Service here</a>
+        </div>
+      </div>
+
+      
+     
+
+    </div>
+  </div>
+</div>
+<% } else { %>
+    <p style="text-align: center;">Please <a href="/auth/login" class="user-icon-btn" title="Log in"><button class="form-button-lo" style="font-weight: bold;">log in</button></a> to leave a feedback.</p>
+<% } %>
+
+    <!-- <div id="thank-you-message" class="thank-you-message">
+      <h3 style="margin-top: 50%;">Thank you for contacting us!</h3>
+      <p >We will get back to you soon.</p>
+      <button class="back-to-home-btn-cn"><a href="/">Back to Home</a></button>
+    </div> -->
+ 
+    <%- include('includes/footer.ejs') %>
+</body>
+  </html>

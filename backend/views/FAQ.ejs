@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="/homepage.css" />
+ <link rel="stylesheet" href="/responsive.css" />
+    <link rel="stylesheet" href="/subpages.css" />
+</head>
+ 
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+<section class="policy">
+    <div class="container" style="padding: 100px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="policy-title">Frequently Asked Questions (FAQ)</h1>
+                <p class="policy-content">
+                    We’ve compiled a list of the most commonly asked questions to help you with your shopping experience at Timeless Jewelry. If your question isn’t listed here, feel free to contact us at <strong>support@timelessjewelry.com</strong>.
+                </p>
+                
+                <h3 class="sub-policy-title">1. What is your return and exchange policy?</h3>
+                <p class="policy-content">
+                    We accept returns and exchanges within 30 days of purchase, provided the item is in its original condition and packaging. Please visit our <a href="exchange.html" class="policy-link">Exchange & Returns Policy</a> page for full details.
+                </p>
+
+                <h3 class="sub-policy-title">2. How long does shipping take?</h3>
+                <p class="policy-content">
+                    Shipping times vary based on your location and the shipping method selected. Standard shipping typically takes 7-14 business days, while express shipping takes 3-7 business days. Check our <a href="shippingpolicy.html" class="policy-link">Shipping Policy</a> page for more information.
+                </p>
+
+                <h3 class="sub-policy-title">3. Do you ship internationally?</h3>
+                <p class="policy-content">
+                    Yes, we offer international shipping to most countries. Please note that customs duties, taxes, or fees may apply depending on your country's regulations.
+                </p>
+
+                <h3 class="sub-policy-title">4. What payment methods do you accept?</h3>
+                <p class="policy-content">
+                    We accept major credit and debit cards (Visa, MasterCard, American Express), bank transfers, and digital wallets such as Apple Pay and Google Pay. All transactions are securely processed.
+                </p>
+
+                <h3 class="sub-policy-title">5. How do I track my order?</h3>
+                <p class="policy-content">
+                    Once your order has been shipped, you will receive a tracking number via email. Use this number on our <a href="#track-order" class="policy-link">Order Tracking</a> page or the carrier’s website to check your shipment status.
+                </p>
+
+                <h3 class="sub-policy-title">6. Can I cancel or change my order?</h3>
+                <p class="policy-content">
+                    You can modify or cancel your order by contacting our customer service team before it is shipped. Once an order has been dispatched, it cannot be changed or canceled.
+                </p>
+
+                <h3 class="sub-policy-title">7. Is my personal information safe?</h3>
+                <p class="policy-content">
+                    Absolutely! We use secure encryption and other safeguards to protect your personal and payment information. Please refer to our <a href="privacy.html" class="policy-link">Privacy Policy</a> for more details.
+                </p>
+
+                <h3 class="sub-policy-title">8. Do you offer custom jewelry services?</h3>
+                <p class="policy-content">
+                    Yes, we offer custom jewelry design services for special occasions. Contact us at <strong>customdesign@timelessjewelry.com</strong> to discuss your requirements.
+                </p>
+
+                <h3 class="sub-policy-title">9. What if I receive a damaged item?</h3>
+                <p class="policy-content">
+                    If your item arrives damaged, please contact us within 48 hours of delivery with photos of the damage. We will assist you in arranging a replacement or refund.
+                </p>
+
+                <h3 class="sub-policy-title">10. How can I contact customer support?</h3>
+                <p class="policy-content">
+                    You can reach our customer support team at <strong>support@timelessjewelry.com</strong> or by calling <strong>+961-***-***</strong>. We’re available Monday to Friday, 9:00 AM to 6:00 PM (local time).
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+  
+  
+  <%- include('includes/footer.ejs') %>
+</body>
+</html>

@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+      <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+        <link rel="stylesheet" href="/homepage.css" />
+  <link rel="stylesheet" href="/responsive.css" />
+       <link rel="stylesheet" href="/subpages.css" />
+      </head>
+  <body>
+   <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+<% 
+  const categoryNames = {
+    rings: "Ring",
+    watches: "Watch",
+    charms: "Charm",
+    bracelets: "Bracelet",
+    necklaces: "Necklace",
+    earrings: "Earring"
+  };
+%>
+
+
+
+    <h1><%= pageTitle %></h1>
+
+    <div class="form-center">
+<% if (!category && !collection) { %>
+  <form action="/admin/select" method="POST" class="united-form">
+
+    <h2>Select Category OR Collection</h2>
+
+    <!-- CATEGORY BOX -->
+    <div class="select-box">
+      <label><strong>Categories</strong></label>
+      <select name="category">
+         <option value="">-- None --</option>
+        <option value="charms">Charms</option>
+        <option value="bracelets">Bracelets</option>
+        <option value="rings">Rings</option>
+        <option value="watches">Watches</option>
+        <option value="necklaces">Necklaces</option>
+        <option value="earrings">Earrings</option>
+      </select>
+    </div>
+
+    <!-- COLLECTION BOX -->
+    <div class="select-box" style="margin-top: 20px;">
+      <label><strong>Collections</strong></label>
+      <select name="collection">
+         <option value="">-- None --</option>
+        <option value="timeless-collection">Timeless Collection</option>
+        <option value="eternal-bloom">Eternal Bloom</option>
+        <option value="bridal-collection">Bridal Collection</option>
+      </select>
+    </div>
+
+    <button type="submit">Continue</button>
+
+    <% if (errorMessage) { %>
+      <p class="error"><%= errorMessage %></p>
+    <% } %>
+
+  </form>
+ <% } else { %>
+      <form action="/admin/add-product" method="POST"  enctype="multipart/form-data" class="united-form">
+      <h2>
+  Add 
+  <% if (category) { %>
+    <%= categoryNames[category] %>
+  <% } else if (collection) { %>
+    <%= collection %>
+  <% } %>
+</h2>
+
+<input type="hidden" name="category" value="<%= category || '' %>">
+<input type="hidden" name="collection" value="<%= collection || '' %>">
+
+         <input type="text" name="name" placeholder="Name" required>
+          <textarea name="description" placeholder="Description" required></textarea>
+          <input type="number" name="price" placeholder="Price" step="0.01" required>
+          <input type="text" name="material" placeholder="Material" required>
+          <input type="number" name="quantity" placeholder="Quantity" required>
+      
+          <% if (category === 'watches') { %>
+        <label>Gold Image:</label>
+        <input type="file" name="imageGold" required>
+
+        <label>Size Range (if applicable):</label>
+        <input type="text" name="sizeRange" placeholder="e.g. 5–9">
+            <% } else if (category === 'rings') { %>
+          <label>Gold Image:</label>
+            <input type="file" name="imageGold" required >
+
+            <label>Silver Image:</label>
+            <input type="file" name="imageSilver" required>
+
+            <label>Rose Gold Image:</label>
+            <input type="file" name="imageRoseGold" required>
+
+            <label>Size Range:</label>
+            <input type="text" name="sizeRange" placeholder="e.g. 5–9">
+             <% } else { %>
+            
+            <label>Gold Image:</label>
+            <input type="file" name="imageGold" required >
+
+            <label>Silver Image:</label>
+            <input type="file" name="imageSilver" required>
+
+            <label>Rose Gold Image:</label>
+            <input type="file" name="imageRoseGold" required>
+          <% } %>
+        <button type="submit">Add</button>
+        <% } %>
+      </form>
+    </div>
+
+     <%- include('includes/footer.ejs') %> 
+  </body>
+</html>

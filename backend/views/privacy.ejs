@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="/homepage.css" />
+ <link rel="stylesheet" href="/responsive.css" />
+    <link rel="stylesheet" href="/subpages.css" />
+</head>
+ 
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+<section class="policy">
+    <div class="container" >
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="policy-title">Privacy Policy</h1>
+                <p class="policy-content">
+                    At Timeless Jewelry, we value your privacy and are committed to protecting your personal information. This Privacy Policy outlines how we collect, use, and safeguard the information you share with us.
+                </p>
+                <h3 class="sub-policy-title">Information We Collect</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li><strong>Personal Information:</strong> Includes your name, email address, phone number, billing and shipping address, and payment details when you make a purchase.</li>
+                        <li><strong>Account Information:</strong> If you create an account, we may collect your username, password, and preferences.</li>
+                        <li><strong>Browsing Information:</strong> Includes cookies, IP addresses, and other data collected when you visit our website.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">How We Use Your Information</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>To process and deliver your orders.</li>
+                        <li>To improve your shopping experience and personalize content.</li>
+                        <li>To communicate with you about your order status, promotions, or updates.</li>
+                        <li>To ensure website security and prevent fraudulent activities.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">How We Protect Your Information</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>We use encryption and secure servers to protect your personal and payment information.</li>
+                        <li>Access to your data is restricted to authorized personnel only.</li>
+                        <li>We regularly review and update our security practices to maintain data integrity.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Sharing Your Information</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>We do not sell or rent your personal information to third parties.</li>
+                        <li>We may share your data with trusted service providers (e.g., payment processors or shipping companies) to complete your order.</li>
+                        <li>Your information may be disclosed if required by law or to protect our rights.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Cookies and Tracking</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Our website uses cookies to enhance your browsing experience and collect analytics.</li>
+                        <li>You can manage your cookie preferences through your browser settings.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Your Rights</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>You can request access to the personal information we have about you.</li>
+                        <li>You may update, correct, or delete your personal data at any time by contacting us.</li>
+                        <li>If you opt-in to receive promotional emails, you may unsubscribe at any time using the link provided in the emails.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Changes to This Policy</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements.</li>
+                        <li>The most recent version will always be available on this page with the "Last Updated" date noted.</li>
+                    </ul>
+                </p>
+                <p class="policy-content">
+                    If you have any questions or concerns about our Privacy Policy, please contact us at <strong>privacy@timelessjewelry.com</strong>. We appreciate your trust and are dedicated to protecting your information.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+  
+  <%- include('includes/footer.ejs') %>
+</body>
+</html>

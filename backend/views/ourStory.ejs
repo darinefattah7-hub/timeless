@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="/homepage.css" />
+ <link rel="stylesheet" href="/responsive.css" />
+    <link rel="stylesheet" href="/subpages.css" />
+</head>
+ 
+<body> <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+
+  <section class="our-story" >
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="story-title">Our Story</h1>
+                <p class="story-content">
+                    Our journey began in <em>2005</em>, driven by a passion for creating exquisite, high-quality jewelry that tells a story of its own. 
+                    From humble beginnings as a small family business, we've grown into a trusted brand, loved by customers around the world.
+                </p>
+                
+                <h3 class="sub-story-title">Our Mission</h3>
+                <p class="story-content">
+                    At Timeless Jewelry, we aim to craft pieces that celebrate life's precious moments. Each design reflects a blend of tradition and innovation, ensuring our jewelry is both timeless and contemporary.
+                </p>
+
+                <h3 class="sub-story-title">Our Craftsmanship</h3>
+                <p class="story-content">
+                    Every piece is meticulously handcrafted by skilled artisans using ethically sourced materials. We prioritize sustainability and quality, ensuring that your jewelry is as meaningful as it is beautiful.
+                </p>
+
+                <h3 class="sub-story-title">Our Promise</h3>
+                <p class="story-content">
+                    We are committed to providing an exceptional customer experience, from helping you find the perfect piece to ensuring your complete satisfaction after purchase.
+                </p>
+
+                <p class="story-content" style="margin-top: 30px; font-weight: 600;">
+                  Thank you for being part of our story.
+                    We look forward to helping you celebrate life's milestones with jewelry that lasts a lifetime.
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+  
+  <%- include('includes/footer.ejs') %>
+</body>
+</html>

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="/homepage.css" />
+ <link rel="stylesheet" href="/responsive.css" />
+    <link rel="stylesheet" href="/subpages.css" />
+</head>
+ 
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+<section class="policy">
+    <div class="container" style="padding: 100px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="policy-title">Purchase & Payment Policy</h1>
+                <p class="policy-content">
+                    At Timeless Jewelry, we aim to make your shopping experience seamless and secure. Below are the terms and guidelines for purchasing and payment on our website.
+                </p>
+                <h3 class="sub-policy-title">Accepted Payment Methods</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>We accept the following payment methods:</li>
+                        <ul>
+                            <li>Credit and Debit Cards (Visa, MasterCard, American Express).</li>
+                            <li>Bank Transfers (available for select regions).</li>
+                            <li>Digital Wallets.</li>
+                        </ul>
+                        <li>All payments are processed securely to ensure the safety of your personal information.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Order Confirmation</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Once your payment is successfully processed, you will receive an order confirmation email with your order details.</li>
+                        <li>If you do not receive a confirmation email, please check your spam/junk folder or contact us at <strong>customer.service@timelessjewelry.com</strong>.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Pricing and Currency</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>All prices are listed in <strong>US dollar</strong>. For international customers, the total amount will be converted to your local currency by your bank or payment provider.</li>
+                        <li>Taxes, duties, and additional fees (if applicable) will be calculated at checkout and included in your total.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Installment Payments</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>We offer flexible installment payment options for eligible orders. Please check the "Installments" option during checkout for more details.</li>
+                        <li>Failure to complete installment payments as agreed may result in cancellation or additional fees.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Failed or Declined Payments</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>If your payment is declined, please verify your payment details and try again.</li>
+                        <li>For assistance, contact your bank or our customer service team at <strong>customer.service@timelessjewelry.com</strong>.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Secure Transactions</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>We use industry-standard encryption to protect your payment information during transactions.</li>
+                        <li>Your privacy and security are our priority. Please review our <a href="privacy.html" class="policy-link">Privacy Policy</a> for more details.</li>
+                    </ul>
+                </p>
+                <p class="policy-content">
+                    If you have any questions about our purchase and payment policy, feel free to contact us at <strong>customer.service@timelessjewelry.com</strong>. We’re here to help make your shopping experience easy and enjoyable!
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+  
+  <%- include('includes/footer.ejs') %>
+</body>
+</html>

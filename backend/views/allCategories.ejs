@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+ 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&display=swap" rel="stylesheet">
+ 
+    <link rel="stylesheet" href="/homepage.css">
+    <link rel="stylesheet" href="/subpages.css">
+</head>
+ 
+<body>
+ 
+<% if (role === 'admin') { %>
+    <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+    <%- include('includes/header.ejs') %>
+<% } %>
+ 
+<div class="products-container united-card">
+ 
+    <div class="products-header" style="text-align:center; margin-bottom:40px;">
+        <h1><%= pageTitle %></h1>
+        <p style="color:#777;">All categories in one place</p>
+    </div>
+ 
+    <!-- ---------------- CHARMS ---------------- -->
+    <h2 style="margin-top:40px;">Charms</h2>
+ 
+    <% if (charms.length > 0) { %>
+        <div class="products-grid">
+            <% charms.forEach(product => { %>
+ 
+                <div class="product-card united-card">
+ 
+                    <img src="/images/<%= product.imageGold || product.imageSilver || product.imageRoseGold %>"
+                         alt="<%= product.name %>"
+                         class="product-image">
+ 
+                    <div class="product-info">
+ 
+                        <div class="product-category"><%= product.category %></div>
+ 
+                        <div class="product-name"><%= product.name %></div>
+ 
+                        <p class="product-description"><%= product.description %></p>
+ 
+                        <div class="product-details">
+                            <div>
+                                <div class="product-price">$<%= parseFloat(product.price).toFixed(2) %></div>
+                                <div style="font-size:.85rem; color:#777;"><%= product.material %></div>
+                            </div>
+<% if (role === 'admin') { %>
+                            <div class="product-quantity <%= product.quantity < 10 ? 'low-stock' : '' %>">
+                                Stock: <%= product.quantity %>
+                            </div>
+<% } %>
+                        </div>
+ 
+                        <button class="btn-united"
+                                onclick="window.location.href='/products/<%= product.ID %>'">
+                            View Details
+                        </button>
+ 
+                        <% if (role === 'admin') { %>
+                            <div class="admin-actions" style="margin-top:15px;">
+                                <a href="/admin/editProduct/<%= product.ID %>">
+                                    <button class="btn-united-outline">Edit</button>
+                                </a>
+ 
+                                <form action="/admin/delete-product/<%= product.ID %>" method="POST">
+                                    <button class="btn-united-outline">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+ 
+                    </div>
+                </div>
+ 
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p style="color:#999;">No charms found.</p>
+    <% } %>
+ 
+    <% if (role === 'admin') { %>
+        <button class="btn-united" onclick="window.location.href='/admin/add/charms'">+ Add New Charm</button>
+    <% } %>
+ 
+    <hr>
+ 
+    <!-- ---------------- BRACELETS ---------------- -->
+    <h2 style="margin-top:40px;">Bracelets</h2>
+ 
+    <% if (bracelets.length > 0) { %>
+        <div class="products-grid">
+            <% bracelets.forEach(product => { %>
+ 
+                <div class="product-card united-card">
+ 
+                    <img src="/images/<%= product.imageGold || product.imageSilver || product.imageRoseGold %>"
+                         alt="<%= product.name %>"
+                         class="product-image">
+ 
+                    <div class="product-info">
+ 
+                        <div class="product-category"><%= product.category %></div>
+ 
+                        <div class="product-name"><%= product.name %></div>
+ 
+                        <p class="product-description"><%= product.description %></p>
+ 
+                        <div class="product-details">
+                            <div>
+                                <div class="product-price">$<%= parseFloat(product.price).toFixed(2) %></div>
+                                <div style="font-size:.85rem; color:#777;"><%= product.material %></div>
+                            </div>
+ 
+                           <% if (role === 'admin') { %>
+                            <div class="product-quantity <%= product.quantity < 10 ? 'low-stock' : '' %>">
+                                Stock: <%= product.quantity %>
+                            </div>
+<% } %>
+                        </div>
+ 
+                        <button class="btn-united"
+                                onclick="window.location.href='/products/<%= product.ID %>'">
+                            View Details
+                        </button>
+ 
+                        <% if (role === 'admin') { %>
+                            <div class="admin-actions" style="margin-top:15px;">
+                                <a href="/admin/editProduct/<%= product.ID %>">
+                                    <button class="btn-united-outline">Edit</button>
+                                </a>
+ 
+                                <form action="/admin/delete-product/<%= product.ID %>" method="POST">
+                                    <button class="btn-united-outline">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+ 
+                    </div>
+                </div>
+ 
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p style="color:#999;">No bracelets found.</p>
+    <% } %>
+ 
+    <% if (role === 'admin') { %>
+        <button class="btn-united" onclick="window.location.href='/admin/add/bracelets'">+ Add New Bracelet</button>
+    <% } %>
+ 
+    <hr>
+ 
+    <!-- ---------------- RINGS ---------------- -->
+    <h2 style="margin-top:40px;">Rings</h2>
+ 
+    <% if (rings.length > 0) { %>
+        <div class="products-grid">
+            <% rings.forEach(product => { %>
+ 
+                <div class="product-card united-card">
+ 
+                    <img src="/images/<%= product.imageGold || product.imageSilver || product.imageRoseGold %>"
+                         alt="<%= product.name %>"
+                         class="product-image">
+ 
+                    <div class="product-info">
+ 
+                        <div class="product-category"><%= product.category %></div>
+ 
+                        <div class="product-name"><%= product.name %></div>
+ 
+                        <p class="product-description"><%= product.description %></p>
+ 
+                        <div class="product-details">
+                            <div>
+                                <div class="product-price">$<%= parseFloat(product.price).toFixed(2) %></div>
+                                <div style="font-size:.85rem; color:#777;"><%= product.material %></div>
+                            </div>
+ 
+                          <% if (role === 'admin') { %>
+                            <div class="product-quantity <%= product.quantity < 10 ? 'low-stock' : '' %>">
+                                Stock: <%= product.quantity %>
+                            </div>
+<% } %>
+                        </div>
+ 
+                        <button class="btn-united"
+                                onclick="window.location.href='/products/<%= product.ID %>'">
+                            View Details
+                        </button>
+ 
+                        <% if (role === 'admin') { %>
+                            <div class="admin-actions" style="margin-top:15px;">
+                                <a href="/admin/editProduct/<%= product.ID %>">
+                                    <button class="btn-united-outline">Edit</button>
+                                </a>
+ 
+                                <form action="/admin/delete-product/<%= product.ID %>" method="POST">
+                                    <button class="btn-united-outline">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+ 
+                    </div>
+                </div>
+ 
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p style="color:#999;">No rings found.</p>
+    <% } %>
+ 
+    <% if (role === 'admin') { %>
+        <button class="btn-united" onclick="window.location.href='/admin/add/rings'">+ Add New Ring</button>
+    <% } %>
+ 
+    <hr>
+ 
+    <!-- ---------------- WATCHES ---------------- -->
+    <h2 style="margin-top:40px;">Watches</h2>
+ 
+    <% if (watches.length > 0) { %>
+        <div class="products-grid">
+            <% watches.forEach(product => { %>
+ 
+                <div class="product-card united-card">
+ 
+                    <img src="/images/<%= product.imageGold || product.imageSilver || product.imageRoseGold %>"
+                         alt="<%= product.name %>"
+                         class="product-image">
+ 
+                    <div class="product-info">
+ 
+                        <div class="product-category"><%= product.category %></div>
+ 
+                        <div class="product-name"><%= product.name %></div>
+ 
+                        <p class="product-description"><%= product.description %></p>
+ 
+                        <div class="product-details">
+                            <div>
+                                <div class="product-price">$<%= parseFloat(product.price).toFixed(2) %></div>
+                                <div style="font-size:.85rem; color:#777;"><%= product.material %></div>
+                            </div>
+ 
+                          <% if (role === 'admin') { %>
+                            <div class="product-quantity <%= product.quantity < 10 ? 'low-stock' : '' %>">
+                                Stock: <%= product.quantity %>
+                            </div>
+<% } %>
+                        </div>
+ 
+                        <button class="btn-united"
+                                onclick="window.location.href='/products/<%= product.ID %>'">
+                            View Details
+                        </button>
+ 
+                        <% if (role === 'admin') { %>
+                            <div class="admin-actions" style="margin-top:15px;">
+                                <a href="/admin/editProduct/<%= product.ID %>">
+                                    <button class="btn-united-outline">Edit</button>
+                                </a>
+ 
+                                <form action="/admin/delete-product/<%= product.ID %>" method="POST">
+                                    <button class="btn-united-outline">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+ 
+                    </div>
+                </div>
+ 
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p style="color:#999;">No watches found.</p>
+    <% } %>
+ 
+    <% if (role === 'admin') { %>
+        <button class="btn-united" onclick="window.location.href='/admin/add/watches'">+ Add New Watch</button>
+    <% } %>
+ 
+    <hr>
+ 
+    <!-- ---------------- NECKLACES ---------------- -->
+    <h2 style="margin-top:40px;">Necklaces</h2>
+ 
+    <% if (necklaces.length > 0) { %>
+        <div class="products-grid">
+            <% necklaces.forEach(product => { %>
+ 
+                <div class="product-card united-card">
+ 
+                    <img src="/images/<%= product.imageGold || product.imageSilver || product.imageRoseGold %>"
+                         alt="<%= product.name %>"
+                         class="product-image">
+ 
+                    <div class="product-info">
+ 
+                        <div class="product-category"><%= product.category %></div>
+ 
+                        <div class="product-name"><%= product.name %></div>
+ 
+                        <p class="product-description"><%= product.description %></p>
+ 
+                        <div class="product-details">
+                            <div>
+                                <div class="product-price">$<%= parseFloat(product.price).toFixed(2) %></div>
+                                <div style="font-size:.85rem; color:#777;"><%= product.material %></div>
+                            </div>
+ 
+                            <% if (role === 'admin') { %>
+                            <div class="product-quantity <%= product.quantity < 10 ? 'low-stock' : '' %>">
+                                Stock: <%= product.quantity %>
+                            </div>
+<% } %>
+                        </div>
+ 
+                        <button class="btn-united"
+                                onclick="window.location.href='/products/<%= product.ID %>'">
+                            View Details
+                        </button>
+ 
+                        <% if (role === 'admin') { %>
+                            <div class="admin-actions" style="margin-top:15px;">
+                                <a href="/admin/editProduct/<%= product.ID %>">
+                                    <button class="btn-united-outline">Edit</button>
+                                </a>
+ 
+                                <form action="/admin/delete-product/<%= product.ID %>" method="POST">
+                                    <button class="btn-united-outline">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+ 
+                    </div>
+                </div>
+ 
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p style="color:#999;">No necklaces found.</p>
+    <% } %>
+ 
+    <% if (role === 'admin') { %>
+        <button class="btn-united" onclick="window.location.href='/admin/add/necklaces'">+ Add New Necklace</button>
+    <% } %>
+ 
+    <hr>
+ 
+    <!-- ---------------- EARRINGS ---------------- -->
+    <h2 style="margin-top:40px;">Earrings</h2>
+ 
+    <% if (earrings.length > 0) { %>
+        <div class="products-grid">
+            <% earrings.forEach(product => { %>
+ 
+                <div class="product-card united-card">
+ 
+                    <img src="/images/<%= product.imageGold || product.imageSilver || product.imageRoseGold %>"
+                         alt="<%= product.name %>"
+                         class="product-image">
+ 
+                    <div class="product-info">
+ 
+                        <div class="product-category"><%= product.category %></div>
+ 
+                        <div class="product-name"><%= product.name %></div>
+ 
+                        <p class="product-description"><%= product.description %></p>
+ 
+                        <div class="product-details">
+                            <div>
+                                <div class="product-price">$<%= parseFloat(product.price).toFixed(2) %></div>
+                                <div style="font-size:.85rem; color:#777;"><%= product.material %></div>
+                            </div>
+ 
+                            <% if (role === 'admin') { %>
+                            <div class="product-quantity <%= product.quantity < 10 ? 'low-stock' : '' %>">
+                                Stock: <%= product.quantity %>
+                            </div>
+<% } %>
+                        </div>
+ 
+                        <button class="btn-united"
+                                onclick="window.location.href='/products/<%= product.ID %>'">
+                            View Details
+                        </button>
+ 
+                        <% if (role === 'admin') { %>
+                            <div class="admin-actions" style="margin-top:15px;">
+                                <a href="/admin/editProduct/<%= product.ID %>">
+                                    <button class="btn-united-outline">Edit</button>
+                                </a>
+ 
+                                <form action="/admin/delete-product/<%= product.ID %>" method="POST">
+                                    <button class="btn-united-outline">Delete</button>
+                                </form>
+                            </div>
+                        <% } %>
+ 
+                    </div>
+                </div>
+ 
+            <% }) %>
+        </div>
+    <% } else { %>
+        <p style="color:#999;">No earrings found.</p>
+    <% } %>
+ 
+    <% if (role === 'admin') { %>
+        <button class="btn-united" onclick="window.location.href='/admin/add/earrings'">+ Add New Earring</button>
+    <% } %>
+ 
+</div>
+ 
+<%- include('includes/footer.ejs') %>
+</body>
+</html>
+ 
+ 

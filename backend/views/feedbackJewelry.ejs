@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title><%= pageTitle %></title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="/homepage.css"/>
+  <link rel="stylesheet" href="/responsive.css"/>
+  <link rel="stylesheet" href="/subpages.css"/>
+</head>
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+<div class="united-form">
+  <h2>Jewelry Feedback</h2>
+
+  <% if (isAuthenticated) { %>
+
+  <form action="/user/addfeedbackJewelry" method="post">
+
+    <div class="form-group">
+      <label>What do you think of the jewelry quality?</label>
+      <textarea name="jewelry-quality" rows="3" placeholder="Your Feedback" required></textarea>
+    </div>
+
+    <div class="form-group">
+      <label>Did the jewelry fit your taste?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="jewelry-taste" value="Yes" required> Yes</label>
+        <label><input type="radio" name="jewelry-taste" value="No" required> No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Was the jewelry in good condition?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="jewelry-condition" value="Yes" required> Yes</label>
+        <label><input type="radio" name="jewelry-condition" value="No" required> No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Do you like the style?</label>
+      <div class="radio-group">
+        <label><input type="radio" name="jewelry-style" value="Yes" required> Yes</label>
+        <label><input type="radio" name="jewelry-style" value="No" required> No</label>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Variety Rating</label>
+      <select name="jewelry-variety" required>
+        <option value="" disabled selected>Select</option>
+        <option>1</option><option>2</option><option>3</option>
+        <option>4</option><option>5</option>
+      </select>
+    </div>
+
+    <button type="submit">Submit Feedback</button>
+  </form>
+
+  <% } else { %>
+    <p style="text-align:center;">Please <a href="/auth/login"><b>log in</b></a> to leave feedback.</p>
+  <% } %>
+
+</div>
+
+<%- include('includes/footer.ejs') %>
+
+
+</body>
+</html>

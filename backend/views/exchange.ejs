@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="/homepage.css" />
+ <link rel="stylesheet" href="/responsive.css" />
+    <link rel="stylesheet" href="/subpages.css" />
+</head>
+ 
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+<section class="policy">
+    <div class="container" style="padding: 100px;">
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="policy-title">Exchange & Returns Policy</h1>
+                <p class="policy-content">
+                    At Timeless Jewelry, we strive to ensure your complete satisfaction with your purchase. If for any reason you are not fully satisfied, our exchange and return policy provides flexibility and peace of mind.
+                </p>
+                <h3 class="sub-policy-title">Eligibility for Exchange or Return</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Items may be exchanged or returned within 30 days of purchase.</li>
+                        <li>Items must be unworn, undamaged, and in original condition.</li>
+                        <li>Items must be accompanied by the original receipt or proof of purchase. </li>
+                        <li> Items must be returned in their original packaging, including jewelry boxes and certificates (if applicable).</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Non-Returnable Items</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Custom-made or personalized jewelry.</li>
+                        <li>Items that have been resized, engraved, or altered at the customer's request.</li>
+                        <li>Earrings (for hygiene reasons).</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Exchange Process</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Contact our customer service team at <strong>customer.service@timelessjewelry.com</strong>.</li>
+                        <li>Select an item of equal or greater value for exchange (price differences will be adjusted).</li>
+                        <li>Exchanges are subject to stock availability.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Returns and Refunds</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Refunds will be processed to the original payment method within 7-10 business days after the returned item is inspected and approved.</li>
+                        <li>Shipping fees are non-refundable.</li>
+                        <li>Customers are responsible for return shipping costs unless the item is defective or incorrect.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Defective or Incorrect Items</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>If you receive a defective or incorrect item, please contact us immediately at <strong>customer.service@timelessjewelry.com</strong>.</li>
+                        <li>We will cover return shipping costs and ensure a replacement is sent promptly.</li>
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">How to Return Items</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Securely package the item, including all original packaging and documentation.</li>
+                        <li>Ship the package to <strong>[Your Store Address]</strong> using a trackable shipping method.</li>
+                        <li>Ensure the package is insured for the value of the item. Timeless Jewelry is not responsible for items lost or damaged during transit.</li>
+                    </ul>
+                </p>
+                <p class="policy-content">
+                    If you have any questions about our exchange and returns policy, please contact us at <strong>customer.service@timelessjewelry.com</strong>. We're here to help!
+                </p>
+            </div>
+        </div>
+    </div>
+</section>
+  
+  
+  <%- include('includes/footer.ejs') %>
+</body>
+</html>

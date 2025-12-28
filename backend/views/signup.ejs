@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= pageTitle %></title>
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400&display=swap" rel="stylesheet">
+
+  <link rel="stylesheet" href="/homepage.css" />
+  <link rel="stylesheet" href="/responsive.css" />
+  <link rel="stylesheet" href="/subpages.css" />
+</head>
+
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+  <div class="form-center" style="margin-top: 15vh; margin-bottom: 15vh;">
+    <h2 style="text-align: center;">Sign Up</h2>
+
+    <form action="/auth/signup" method="POST" class="united-form">
+
+      <label for="username">Username:</label>
+      <input type="text" id="username" name="username" placeholder="Username" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" name="email" placeholder="Email" required>
+
+      <label for="passwordsi">Password:</label>
+      <input type="password" id="passwordsi" name="password" placeholder="Password" required>
+
+      <button type="submit">Sign Up</button>
+    </form>
+
+    <p style="text-align: center; margin-top: 20px;">
+      Already have an account?
+      <a href="/auth/login" class="user-icon-btn">
+        <button class="form-button-lo" style="font-weight: bold;">Log In</button>
+      </a>
+    </p>
+  </div>
+
+  <%- include('includes/footer.ejs') %>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<header>
+        <div class="slogan">
+            <p>Jewelry beyond time</p>
+        </div>
+        <div class="header-content">
+           
+           
+            <div class="left-cont">
+               
+ <a href="/allProducts" class="add-icon" title="Manage Products" style="margin-right: 15px;">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-box-seam" viewBox="0 0 16 16">
+    <path d="M8.186 1.113a.5.5 0 0 0-.372 0L1.846 3.5l2.404.961L10.404 2zm3.564 1.426L5.596 5 8 5.961 14.154 3.5zm3.25 1.7-6.5 2.6v7.922l6.5-2.6V4.24zM7.5 14.762V6.838L1 4.239v7.923zM7.443.184a1.5 1.5 0 0 1 1.114 0l7.129 2.852A.5.5 0 0 1 16 3.5v8.662a1 1 0 0 1-.629.928l-7.185 2.874a.5.5 0 0 1-.372 0L.63 13.09a1 1 0 0 1-.63-.928V3.5a.5.5 0 0 1 .314-.464z"/>
+  </svg>
+</a>
+
+   <a href="/admin/add" class="add-icon" title="Add Product">
+  <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-plus-circle text-success" viewBox="0 0 16 16">
+    <path d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14m0 1A8 8 0 1 1 8 0a8 8 0 0 1 0 16"/>
+    <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4"/>
+  </svg>
+</a>
+
+
+  <a href="/admin/users" class="manage-users-btn">
+   <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-person-add" viewBox="0 0 16 16">
+  <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m.5-5v1h1a.5.5 0 0 1 0 1h-1v1a.5.5 0 0 1-1 0v-1h-1a.5.5 0 0 1 0-1h1v-1a.5.5 0 0 1 1 0m-2-6a3 3 0 1 1-6 0 3 3 0 0 1 6 0M8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4"/>
+  <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+</svg>
+
+</a>
+
+
+                
+           
+            </div>
+           
+        
+            <div class="logo2">
+  <a href="/">
+    <img src="/photos/logo.png" alt="Logo">
+  </a>
+</div>
+<!-- SEARCH BAR WRAPPER (always visible) -->
+  <div class="header-right">
+
+        <!-- SEARCH BAR -->
+        <form action="/searchProduct" method="GET" class="header-search">
+    <input type="text" name="searchQuery" placeholder="Search..." required>
+    <button type="submit" class="search-btn">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+            fill="currentColor" viewBox="0 0 16 16">
+            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.60.098.115l3.85 
+            3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 
+            6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+        </svg>
+    </button>
+</form>
+
+
+            <div class="right-cont">
+         
+       
+              
+          
+           <div class="user">
+        <% if (isAuthenticated) { %>
+          <form action="/auth/logout" method="post" class="logout-form">
+    <button type="submit" class="logout-btn admin-logout-btn" title="Log out (Admin)">
+        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24"
+             fill="currentColor" viewBox="0 0 16 16" class="admin-icon">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6"/>
+            <path d="M8.256 14a4.5 4.5 0 0 1-.229-1.004H3c.001-.246.154-.986.832-1.664C4.484 10.68 5.711 10 8 10q.39 0 .74.025c.226-.341.496-.65.804-.918Q8.844 9.002 8 9c-5 0-6 3-6 4s1 1 1 1z"/>
+            <path d="M12.5 16a3.5 3.5 0 1 0 0-7 3.5 3.5 0 0 0 0 7m1.679-4.493-1.335 2.226a.75.75 0 0 1-1.174.144l-.774-.773a.5.5 0 0 1 .708-.708l.547.548 1.17-1.951a.5.5 0 1 1 .858.514"/>
+        </svg>
+        <span class="admin-badge">ADMIN</span>
+    </button>
+</form>
+
+        <% } else { %>
+          <a href="/auth/login" title="Log in">
+            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="user-icon" viewBox="0 0 16 16">
+              <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6m4-3a4 4 0 1 1-8 0 4 4 0 0 1 8 0"/>
+              <path d="M14 14s-1-1-6-1-6 1-6 1-1 0-1-1 1-4 7-4 7 3 7 4-1 1-1 1"/>
+            </svg>
+          </a>
+        <% } %>
+      </div>
+
+          
+          </div>
+            </div>
+        </div>
+         
+           
+       
+            
+           
+
+  
+  
+       
+       
+<div class="categories">
+    <a href="/charms" >Charms</a>
+    <a href="/earrings">Earrings</a>
+    <a href="/necklaces">Necklaces</a>
+    <a href="/bracelets">Bracelets</a>
+    <a href="/rings">Rings</a>
+    <a href="/watches">Watches</a>
+</div>
+ 
+      
+
+       
+   
+           
+            <button class="menu-button" onclick="toggleMenu()">☰</button>
+           
+            <div class="menu" id="menu">
+               
+                <a href="contact.html">✧Contact</a>
+     
+               <a href="location.html">✧Location</a>
+                  
+                  
+                <a href="profile.html" >✧Profile</a>
+                <a href="wishlist.html">✧Wishlist</a>
+                <a href="cart.html">✧Cart</a>
+                <a href="#feedback" class="button" onclick="openFeedbackForm(event)">✧feedback</a>
+                <a href="#" onclick="toggleMenu()">Close</a>
+            </div>
+           
+ 
+            <script>
+                function toggleMenu() {
+                    const menu = document.getElementById('menu');
+                    menu.style.display = menu.style.display === 'block' ? 'none' : 'block';
+                }
+                const triggerIcon = document.getElementById('trigger-icon');
+const inputBar = document.getElementById('input-bar');
+
+
+triggerIcon.addEventListener('click', function() {
+  
+  inputBar.classList.toggle('show');
+});
+            </script>
+       
+</header>

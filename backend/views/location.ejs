@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="/homepage.css" />
+ <link rel="stylesheet" href="/responsive.css" />
+    <link rel="stylesheet" href="/subpages.css" />
+</head>
+ 
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+<div class="store-locations">
+    <h2 class="store-header" style="font-weight: bold;margin-bottom: 5vh;">Find the Perfect Piece at Timeless! Your Destination for Elegance.</h2>
+    <div class="location-list">
+      <div class="location-item">
+        <img src="photos/zahle.png" alt="Zahle Location" class="location-image">
+        <p class="location-name">⚲ Zahle-Lebanon</p>
+        <p class="location-address">⤷ Fakhr El-Dine Street</p>
+        <p class="location-contact">🕻 Tel: +961 8 *** ***</p>
+      </div>
+      <div class="location-item">
+        <img src="photos/batroun.jpg" alt="Batroun Location" class="location-image">
+        <p class="location-name">⚲ Batroun-Lebanon</p>
+        <p class="location-address">⤷ Al-Mina Street</p>
+        <p class="location-contact">🕻 Tel: +961 6 *** ***</p>
+      </div>
+      <div class="location-item">
+        <img src="photos/beirut.jpg" alt="Beirut Location" class="location-image">
+        <p class="location-name">⚲ Beirut-Lebanon</p>
+        <p class="location-address">⤷ ABC Mall-Achrafieh</p>
+        <p class="location-contact">🕻 Tel: +961 1 *** ***</p>
+      </div>
+    </div>
+    <h2 class="store-footer" style="margin-top: 5vh;margin-bottom: 5vh;">♡ Just one visit away from perfection ♡</h2>
+  </div>
+  
+  <%- include('includes/footer.ejs') %>
+</body>
+</html>

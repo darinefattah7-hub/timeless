@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+ 
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500&display=swap" rel="stylesheet">
+ 
+    <link rel="stylesheet" href="/homepage.css">
+    <link rel="stylesheet" href="/subpages.css">
+</head>
+ 
+<body>
+    <% if (role === 'admin') { %>
+        <%- include('includes/adminDashboard.ejs') %>
+    <% } else { %>
+        <%- include('includes/header.ejs') %>
+    <% } %>
+ 
+    <div class="product-detail-container united-card">
+ 
+        <a href="/<%=product.category%>"  style="color:#333; text-decoration:none;">← Back</a>
+ 
+        <div class="product-detail-grid">
+ 
+            <div class="product-images">
+                <img id="mainImage"
+                     src="/images/<%= product.imageGold || product.imageSilver || product.imageRoseGold %>"
+                     alt="<%= product.name %>"
+                     class="main-image">
+ 
+                <div class="thumbnail-container">
+                    <% if (product.imageGold) { %>
+                        <img src="/images/<%= product.imageGold %>"
+                             class="thumbnail active"
+                             onclick="changeImage(this)">
+                    <% } %>
+                    <% if (product.imageSilver) { %>
+                        <img src="/images/<%= product.imageSilver %>"
+                             class="thumbnail"
+                             onclick="changeImage(this)">
+                    <% } %>
+                    <% if (product.imageRoseGold) { %>
+                        <img src="/images/<%= product.imageRoseGold %>"
+                             class="thumbnail"
+                             onclick="changeImage(this)">
+                    <% } %>
+                </div>
+            </div>
+ 
+            <div class="product-info-detail">
+ 
+               
+ 
+                <h1 class="product-title"><%= product.name %></h1>
+ 
+                <div class="product-price-large">$<%= parseFloat(product.price).toFixed(2) %></div>
+ 
+                <p class="product-description-full"><%= product.description %></p>
+ 
+                <div class="product-specs united-card" style="padding:20px; margin-top:20px;">
+ 
+                    <div class="spec-row">
+                        <span class="spec-label">Material:</span>
+                        <span class="spec-value"><%= product.material %></span>
+                    </div>
+ 
+                   
+ 
+                    <% if (product.sizeRange) { %>
+                        <div class="spec-row">
+                            <span class="spec-label">Size Range:</span>
+                            <span class="spec-value"><%= product.sizeRange %></span>
+                        </div>
+                    <% } %>
+ 
+                    <div class="spec-row">
+                        <span class="spec-label">Availability:</span>
+                        <span class="spec-value">
+                            <% if (product.quantity > 10) { %>
+                                <span class="stock-status in-stock">In Stock</span>
+                            <% } else if (product.quantity > 0) { %>
+                                <span class="stock-status low-stock">Low Stock</span>
+                            <% } else { %>
+                                <span class="stock-status out-of-stock">Out of Stock</span>
+                            <% } %>
+                        </span>
+                    </div>
+ 
+                </div>
+ 
+               <% if (product.quantity > 0) { %>
+ 
+   
+    <% if (isAuthenticated && role !== 'admin') { %>
+        <div class="action-buttons" style="margin-top:20px; display:flex; gap:15px;">
+ 
+           
+            <form action="/user/cart/add/<%= product.ID %>" method="POST" style="flex:1;">
+                <button class="btn-united" type="submit">Add to Cart</button>
+            </form>
+ 
+           
+            <% if (!inWishlist) { %>
+                <form action="/user/wishlist/add/<%= product.ID %>" method="POST">
+                    <button class="btn-united-outline" type="submit">
+                        ♥ Add to Wishlist
+                    </button>
+                </form>
+            <% } else { %>
+                <form action="/user/wishlist/remove/<%= product.ID %>" method="POST">
+                    <button class="btn-united" type="submit" style="background:#e74c3c;">
+                        ✖ Remove from Wishlist
+                    </button>
+                </form>
+            <% } %>
+ 
+        </div>
+    <% } %>
+ 
+   
+  <% if (!isAuthenticated) { %>
+    <p style="font-size:1rem; margin-top:20px;">
+        <a href="/auth/login"
+           style="color:#000; font-weight:700; text-decoration:none; margin-right:5px;">
+            Login
+        </a>
+        <span style="color:#555;">to add to Cart / Wishlist</span>
+    </p>
+<% } %>
+ 
+<% } else { %>
+    <button class="btn-united" disabled style="opacity:.5;">
+        Out of Stock
+    </button>
+<% } %>
+ 
+<% if (role === 'admin') { %>
+    <div class="admin-actions" style="margin-top:30px; display:flex; gap:10px;">
+ 
+        <a href="/admin/editProduct/<%= product.ID %>">
+            <button class="btn-united-outline">Edit</button>
+        </a>
+ 
+        <form action="/admin/delete-product/<%= product.ID %>" method="POST" style="display:inline;">
+            <button class="btn-united-outline">Delete</button>
+        </form>
+ 
+    </div>
+<% } %>
+            </div>
+ 
+        </div>  
+    </div>
+ 
+    <%- include('includes/footer.ejs') %>
+ 
+<script>
+function changeImage(img) {
+    document.getElementById('mainImage').src = img.src;
+    document.querySelectorAll('.thumbnail').forEach(t => t.classList.remove('active'));
+    img.classList.add('active');
+}
+</script>
+ 
+</body>
+</html>
+ 
+ 

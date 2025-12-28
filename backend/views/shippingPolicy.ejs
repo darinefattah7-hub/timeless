@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+ 
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="/homepage.css" />
+ <link rel="stylesheet" href="/responsive.css" />
+    <link rel="stylesheet" href="/subpages.css" />
+</head>
+ 
+<body>
+ <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+
+  <section class="shipping-policy">
+    <div class="container" style="padding: 100px;" >
+        <div class="row">
+            <div class="col-md-12">
+                <h1 class="policy-title">Shipping Policy</h1>
+                <p class="policy-content">
+                    Thank you for choosing to shop with us! We strive to provide you with a seamless and enjoyable shopping experience. Please take a moment to review our shipping policy to understand how we handle the delivery of your orders.
+
+                </p>
+                <h3 class="sub-policy-title"> International Shipping</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>We are pleased to offer international shipping to our customers in Lebanon and around the world. All international orders will be processed and shipped from our warehouse within 1-3 business days, excluding weekends and holidays.</li>
+
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title"> Shipping Methods</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>We utilize reliable international shipping carriers to ensure the safe and timely delivery of your orders. The shipping methods available for international orders include:</li>
+                        <li>Standard Shipping: Estimated delivery time is 7-14 business days.</li>
+                        <li>Express Shipping: Estimated delivery time is 3-7 business days.</li>
+                        <li>Please note that delivery times may vary depending on your location, customs processing, and other factors beyond our control.</li>
+
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title"> Shipping Costs</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Shipping costs are calculated based on the weight of your order and the shipping method selected during checkout. You can view the shipping costs before completing your purchase.</li>
+
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title"> Customs and Duties</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>International customers are responsible for any customs duties, taxes, or fees that may be incurred upon delivery. Customs policies vary by country, so please check with your local customs office for more information.</li>
+
+
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Order Changes and Cancellations</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>If you need to make changes to your order or cancel it, please contact our customer service team as soon as possible. Once an order has been shipped, it cannot be modified or canceled.</li>
+                        
+
+                    </ul>
+                </p>
+                <h3 class="sub-policy-title">Shipping Restrections</h3>
+                <p class="policy-content">
+                    <ul>
+                        <li>Please be aware that certain products may be subject to shipping restrictions or regulations in certain countries. We will notify you if any issues arise with your order due to these restrictions.
+                            If you have any questions or concerns regarding our shipping policy, feel free to contact our customer service team at customer.service@timelessjewellery.com
+                            
+                            Thank you for choosing us, and we appreciate your understanding and cooperation in ensuring a smooth international shopping experience!</li>
+                        
+
+                    </ul>
+                </p>
+
+
+
+            </div>
+        </div>
+    </div>
+</section>
+  
+  <%- include('includes/footer.ejs') %>
+</body>
+</html>

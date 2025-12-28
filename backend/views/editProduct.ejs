@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/homepage.css" />
+      <link rel="stylesheet" href="/responsive.css" />
+       <link rel="stylesheet" href="/subpages.css" />
+      <link rel="stylesheet" href="/404.css" />
+
+
+  </head>
+<body>
+      <%- include('includes/adminDashboard.ejs') %>
+
+    <div class="united-wrapper">
+        <div class="united-form">
+ <% const categoryNames = {
+    rings: "Ring",
+    watches: "Watch",
+    charms: "Charm",
+    bracelets: "Bracelet",
+    necklaces: "Necklace",
+    earrings: "Earring"
+  };
+%>
+            <h2>Edit <%= categoryNames[previousCategory] %></h2>
+
+            <% if (product) { %>
+
+            <form action="/admin/editProduct/<%= product.ID %>"  method="POST" enctype="multipart/form-data">
+
+                <!-- PRODUCT NAME -->
+                <label>Name</label>
+                <input type="text" name="name" value="<%= product.name %>" required>
+
+                <!-- PRICE -->
+                <label>Price</label>
+                <input type="number" name="price" value="<%= product.price %>" required>
+
+
+                <!-- MATERIAL -->
+                <label>Material</label>
+      
+      
+                <input type="text" name="material" value="<%= product.material %>">
+<input type="hidden" name="previousCategory" value="<%= previousCategory %>">
+
+                <!-- QUANTITY -->
+                <label>Stock Quantity</label>
+                <input type="number" name="quantity" value="<%= product.quantity %>">
+
+                <!-- SIZE RANGE (Ring + Watch ONLY) -->
+                <% if (previousCategory === "rings" || previousCategory === "watches") { %>
+                <label>Size Range</label>
+                <input type="text" name="sizeRange" value="<%= product.sizeRange || "" %>">
+                <% } %>
+
+                <!-- IMAGES DEPENDING ON CATEGORY -->
+
+                <!-- RING → Show 3 images -->
+               <% if (previousCategory === "rings") { %>
+
+ <label>Gold Image</label>
+
+<!-- Show existing image -->
+<% if (product.imageGold) { %>
+    <img src="/images/<%= product.imageGold %>" 
+         alt="Gold Image"
+         style="width:120px; height:120px; border-radius:8px; object-fit:cover; margin-bottom:10px;">
+<% }  %>
+
+<!-- Upload new image -->
+<input type="file" name="imageGold" accept="image/*">  
+
+<label>Silver Image</label>
+
+<% if (product.imageSilver) { %>
+    <img src="/images/<%= product.imageSilver %>" 
+         alt="Silver Image"
+         style="width:120px; height:120px; border-radius:8px; object-fit:cover; margin-bottom:10px;">
+<% }  %>
+
+<input type="file" name="imageSilver" accept="image/*">
+
+ <label>Rose Gold Image</label>
+
+<% if (product.imageRoseGold) { %>
+    <img src="/images/<%= product.imageRoseGold %>" 
+         alt="Rose Gold Image"
+         style="width:120px; height:120px; border-radius:8px; object-fit:cover; margin-bottom:10px;">
+<% } %>
+
+<input type="file" name="imageRoseGold" accept="image/*">
+
+<% } %>
+
+
+                <!-- WATCH → Only Gold image -->
+                <% if (previousCategory === "watches") { %>
+
+    <label>Gold Image</label>
+
+<!-- Show existing image -->
+<% if (product.imageGold) { %>
+    <img src="/images/<%= product.imageGold %>" 
+         alt="Gold Image"
+         style="width:120px; height:120px; border-radius:8px; object-fit:cover; margin-bottom:10px;">
+<% }  %>
+
+<!-- Upload new image -->
+<input type="file" name="imageGold" accept="image/*"> 
+<% } %>
+
+                <!-- OTHER CATEGORIES → Show 3 images but NO size -->
+                <% if (
+                    previousCategory !== "rings" &&
+                    previousCategory !== "watches"
+                ) { %>
+
+                  <label>Gold Image</label>
+
+<!-- Show existing image -->
+<% if (product.imageGold) { %>
+    <img src="/images/<%= product.imageGold %>" 
+         alt="Gold Image"
+         style="width:120px; height:120px; border-radius:8px; object-fit:cover; margin-bottom:10px;">
+<% }  %>
+
+<!-- Upload new image -->
+<input type="file" name="imageGold" accept="image/*"> 
+
+<label>Silver Image</label>
+
+<% if (product.imageSilver) { %>
+    <img src="/images/<%= product.imageSilver %>" 
+         alt="Silver Image"
+         style="width:120px; height:120px; border-radius:8px; object-fit:cover; margin-bottom:10px;">
+<% }  %>
+
+<input type="file" name="imageSilver" accept="image/*">
+
+ <label>Rose Gold Image</label>
+
+<% if (product.imageRoseGold) { %>
+    <img src="/images/<%= product.imageRoseGold %>" 
+         alt="Rose Gold Image"
+         style="width:120px; height:120px; border-radius:8px; object-fit:cover; margin-bottom:10px;">
+<% } %>
+
+<input type="file" name="imageRoseGold" accept="image/*">
+
+                <% } %>
+
+                <!-- DESCRIPTION -->
+                <label>Description</label>
+                <textarea name="description"><%= product.description %></textarea>
+
+                <button type="submit">Update Product</button>
+
+                <% if (errorMessage) { %>
+                <p class="error-message"><%= errorMessage %></p>
+                <% } %>
+
+            </form>
+
+            <% } else { %>
+
+            <h3 class="error-message">Product not found</h3>
+
+            <% } %>
+
+        </div>
+    </div>
+
+    <%- include('includes/footer.ejs') %>
+</body>
+</html>

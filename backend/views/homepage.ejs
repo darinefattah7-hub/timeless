@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= pageTitle %></title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+  
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;1,400&display=swap" rel="stylesheet">
+    <script src="script.js"></script>
+     <link rel="stylesheet" href="/homepage.css" />
+<link rel="stylesheet" href="/responsive.css" />
+       <link rel="stylesheet" href="/subpages.css" />
+</head>
+<body>
+  <% if (role === 'admin') { %>
+  <%- include('includes/adminDashboard.ejs') %>
+<% } else { %>
+  <%- include('includes/header.ejs') %>
+<% } %>
+
+
+<div class="hero-section">
+   
+    <img src="photos/hero1.png" alt="Hero Image" class="hero-image">
+
+
+
+        <a href="#categories"  class="photo-button">SHOP NOW</a>
+       
+</div>
+
+<button id="open-wheel-button" class="open-wheel-button">SPIN!</button>
+
+<div id="wheel-container" class="wheel-container" style="display:none;">
+    <div id="wheel-popup" class="wheel-popup">
+        <div class="wheel-header">
+            <h2 style="margin-top: 10px;">Spin to Sparkle!</h2>
+            <p>Celebrate Christmas & New Year with exclusive prizes!</p>
+          
+            <button id="close-wheel-button" class="close">&times;</button>
+        </div>
+        <div class="wheel-wrapper">
+            <div class="arrow" id="arrow"></div>
+            <canvas style="transform: rotate(346deg);" id="wheel" width="400" height="400"></canvas>
+        </div>
+        <button id="spin-button" class="spin-button">Spin the Wheel</button>
+        <div id="timer"></div> 
+    </div>
+</div>
+
+
+<div id="win-message" class="win-message">
+    <p id="prize-text"></p>
+    <button id="close-button" class="close-button">Close</button>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
+<script>
+    function triggerConfetti() {
+    confetti({
+        particleCount: 250,   
+        spread: 100,        
+        origin: { x: 0.5, y: 0.3 }, 
+        colors: ['#9CAF88', '#000000', '#F5F5DC'] ,
+        zIndex: 9999 
+    });
+}
+document.addEventListener('DOMContentLoaded', function () {
+    const canvas = document.getElementById('wheel');
+    const ctx = canvas.getContext('2d');
+    const spinButton = document.getElementById('spin-button');
+    const winMessage = document.getElementById('win-message');
+    const prizeText = document.getElementById('prize-text');
+    const closeButton = document.getElementById('close-button');
+    const wheelContainer = document.getElementById('wheel-container');
+    const timerElement = document.getElementById('timer');
+    const openWheelButton = document.getElementById('open-wheel-button');
+    const closeWheelButton = document.getElementById('close-wheel-button'); 
+
+    const prizes = [
+        "Free Necklace",
+        "20% Off Discount",
+        "Free Earrings",
+        "Free Bracelet",
+        "Free Ornament",
+        "Gift Card",
+        "Lucky Draw",
+        "Exclusive Discount",
+        "Mystery Prize",
+        "Voucher",
+        "VIP Access",
+        "Free Shipping"
+    ];
+
+   
+    const colors = ["#9CAF88", "#F5F5DC", "#FFFFF0", "#9CAF88", "#F5F5DC", "#FFFFF0", "#9CAF88", "#F5F5DC", "#FFFFF0", "#9CAF88", "#F5F5DC", "#FFFFF0"];
+    const numSegments = prizes.length;
+    const segmentAngle = (2 * Math.PI) / numSegments;
+    let startAngle = 0;
+    let currentRotation = 0;
+
+    let nextSpinTime = null; 
+
+    function drawWheel() {
+        const radius = canvas.width / 2;
+
+        for (let i = 0; i < numSegments; i++) {
+            const angle = startAngle + i * segmentAngle;
+
+           
+            ctx.beginPath();
+            ctx.moveTo(radius, radius);
+            ctx.arc(radius, radius, radius, angle, angle + segmentAngle);
+            ctx.closePath();
+            ctx.fillStyle = colors[i];
+            ctx.fill();
+
+            ctx.save();
+            ctx.translate(radius, radius);
+            ctx.rotate(angle + segmentAngle / 2);
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#000";
+            ctx.font = "14px Arial";
+            ctx.fillText(prizes[i], radius * 0.65, 0);
+            ctx.restore();
+        }
+    }
+
+  
+    function spinWheel() {
+        const spins = Math.floor(Math.random() * 6) + 5;
+        const finalSegment = Math.floor(Math.random() * numSegments); 
+        const spinAngle = spins * 2 * Math.PI + finalSegment * segmentAngle;
+
+        let duration = 5000; 
+        let startTime = null;
+
+        function animateSpin(time) {
+            if (!startTime) startTime = time;
+            const elapsed = time - startTime;
+
+            if (elapsed < duration) {
+                const easedRotation = easeOut(elapsed / duration) * spinAngle;
+                currentRotation = easedRotation % (2 * Math.PI);
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                ctx.save();
+                ctx.translate(canvas.width / 2, canvas.height / 2);
+                ctx.rotate(currentRotation);
+                ctx.translate(-canvas.width / 2, -canvas.height / 2);
+                drawWheel();
+                ctx.restore();
+                requestAnimationFrame(animateSpin);
+            } else {
+                const winningIndex = Math.floor(((2 * Math.PI - currentRotation) % (2 * Math.PI)) / segmentAngle);
+                const prize = prizes[winningIndex];
+                prizeText.textContent = `You Won: ${prize}`;
+                winMessage.style.display = "block";
+                spinButton.disabled = false;
+                triggerConfetti(); 
+            }
+        }
+
+        requestAnimationFrame(animateSpin);
+    }
+
+    function easeOut(t) {
+        return 1 - Math.pow(1 - t, 3);
+    }
+
+    spinButton.addEventListener('click', () => {
+        if (nextSpinTime && Date.now() < nextSpinTime) {
+       
+            const timeRemaining = nextSpinTime - Date.now();
+            const hours = Math.floor(timeRemaining / (1000 * 60 * 60));
+            const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+            timerElement.textContent = `Next spin in: ${hours} hours ${minutes} minutes`;
+        } else {
+            spinButton.disabled = true;
+            spinWheel();
+        
+            nextSpinTime = Date.now() + 24 * 60 * 60 * 1000;
+            timerElement.textContent = ''; 
+        }
+    });
+
+    closeButton.addEventListener('click', () => {
+        winMessage.style.display = "none";
+        wheelContainer.style.display = "none";
+    });
+
+ 
+    openWheelButton.addEventListener('click', () => {
+        wheelContainer.style.display = "block";
+    });
+
+
+    closeWheelButton.addEventListener('click', () => {
+        wheelContainer.style.display = "none";
+    });
+
+    
+    wheelContainer.style.display = "none";
+
+    
+    drawWheel();
+});
+
+
+</script>
+ 
+ 
+<div class="hero-collections">
+    <div class="collections-title">
+        <h2>Collections</h2>
+        <p>
+            Our collections represent an assemblage of diverse jewelry pieces united by a common theme.
+            Select various items that harmoniously complement one another to craft a cohesive style.
+        </p>
+    </div>
+ 
+    <div class="collection-list">
+       
+        <div class="collection-row">
+            <div class="collection-item small">
+                <a href="/timeless-collection">
+                <img src="photos/collection1.jpg" alt="Collection Image 1">
+            </a>
+            <a href="/timeless-collection">
+                <div class="collection-name">Timeless Collection</div></a>
+            </div>
+            <div class="collection-item large">
+                <a href="/eternal-bloom">
+                <img src="photos/collection2.jpg" alt="Collection Image 2">
+            </a>
+            <a href="/eternal-bloom">
+                <div class="collection-name">Eternal Bloom Collection</div></a>
+            </div>
+        </div>
+ 
+     
+        <div class="collection-item full">
+            <a href="/bridal-collection">
+            <img src="photos/collection3.jpg" alt="Collection Image 3">
+        </a>
+            <div class="collection-name">Bridal Collection</div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<div id="categories" class="catagories-section">
+    <div   class="catag-title" >
+        <h2>Shop By Catagory</h2>
+    </div>
+    <div class="catagory-list">
+        <div class="row">
+            <div class="col">
+                <div class="catagory-element">
+                    <div class="catagory-img">
+                        <a href="/bracelets">
+                        <img src="photos/braceletcat.jpg" alt="collection1">
+                        </a>
+                    </div>
+                    <div class="catagory-name">
+                        <h6>Bracelets</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <h6>Shop By <br>Category</h6>
+            </div>
+            <div class="col">
+                <div class="catagory-element">
+                    <div class="catagory-img">
+                        <a href="/necklaces">
+                        <img src="photos/necklacecat.jpg" alt="collection2">
+                    </a>
+                    </div>
+                    <div class="catagory-name">
+                        <h6>Necklaces</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <div class="catagory-element">
+                    <div class="catagory-img">
+                        <a href="/earrings">
+                        <img src="photos/earringcat.jpg"alt="collection3">
+                        </a>
+                    </div>
+                    <div class="catagory-name">
+                        <h6>Earrings</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="catagory-element">
+                    <div class="catagory-img">
+                        <a href="/rings">
+                        <img src="photos/ringcat.jpg" alt="collection4">
+                    </a>
+                    </div>
+                    <div class="catagory-name">
+                        <h6>Rings</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="catagory-element">
+                    <div class="catagory-img">
+                        <a href="/watches">
+                        <img src="photos/watchcat.jpg" alt="collection5">
+                    </a>
+                    </div>
+                    <div class="catagory-name">
+                        <h6>Watches</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+ 
+ 
+ 
+<section class="bestseller-section">
+
+  <h2 class="section-title">Best Sellers</h2>
+
+  <% if (items && items.length > 0) { %>
+    <div class="bestseller-grid">
+
+      <% items.forEach(product => { %>
+      
+        <div class="bestseller-card united-card">
+
+          <img 
+            src="/images/<%= product.imageGold || product.imageSilver || product.imageRoseGold %>" 
+            alt="<%= product.name %>"
+            class="bestseller-img"
+          >
+
+          <h3 class="bestseller-name"><%= product.name %></h3>
+
+          <p class="bestseller-price">$<%= parseFloat(product.price).toFixed(2) %></p>
+
+          <button class="btn-united" onclick="window.location.href='/products/<%= product.ID %>'">
+            View Product
+          </button>
+
+        </div>
+
+      <% }) %>
+
+    </div>
+
+  <% } else { %>
+      <p style="text-align:center; margin-top:20px; color:#777;">No best sellers available yet.</p>
+  <% } %>
+
+</section>
+ 
+
+     
+<%- include('includes/footer.ejs') %>
+ 
+ 
+</body>
+ 
+</html>
+ 
