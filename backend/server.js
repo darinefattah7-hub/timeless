@@ -74,9 +74,13 @@ app.use(
   ])
 );
 app.use(bodyParser.urlencoded({ extended: false }));
-app.use(express.static(path.join(rootDir, "public")));
+// Serve frontend static assets from the repository-level `frontend/public` folder.
+// This lets you keep front-end assets in a top-level `frontend/` directory.
+app.use(express.static(path.join(rootDir, '..', 'frontend', 'public')));
 
-app.use(express.static(path.join(rootDir, "public")));
+// Backward-compatible: if you still have `backend/public` during migration,
+// this maintains the same behavior until you move files.
+app.use(express.static(path.join(rootDir, 'public')));
 app.use(bodyParser.json());
 app.use("/images", express.static(path.join(rootDir, "images")));
 
